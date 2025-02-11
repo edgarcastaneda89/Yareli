@@ -10,7 +10,6 @@
         html,
         body {
             overflow: hidden;
-            /* Disables scrolling */
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -19,7 +18,7 @@
 
         body {
             background-image: url('valentinesPic.jpg');
-            /* Initial background */
+            /* Make sure this file is in your repo */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -31,19 +30,17 @@
             align-items: center;
             justify-content: center;
             transition: background 1s ease-in-out;
-            /* Smooth transition */
             position: relative;
         }
 
         #valentine-text {
             position: absolute;
-            top: 11%;
+            top: 15%;
             left: 50%;
             transform: translateX(-50%);
             font-size: 28px;
             font-weight: bold;
             background: rgba(255, 182, 193, 0.8);
-            /* Soft pink background for readability */
             padding: 10px 20px;
             border-radius: 15px;
             color: black;
@@ -98,35 +95,51 @@
 
         <div class="buttons">
             <button class="yes" onclick="yesClicked()">Yes 💕</button>
-            <button class="no" id="noButton" onmouseover="moveNoButton()">❌ Nope!</button>
+            <button class="no" id="noButton" onmouseover="moveNoButton()" onclick="forceYes()">❌ Nope!</button>
         </div>
     </div>
 
     <script>
+        let moveDistance = 50; // Initial move distance
+
         function yesClicked() {
             // Change the background to the animated Snoopy Love GIF
-            document.body.style.backgroundImage = "url('snoopy-love.gif')";
+            document.body.style.backgroundImage = "url('snoopy-love.gif')"; // Ensure this file is in your repo
             document.body.style.backgroundSize = "cover";
             document.body.style.backgroundRepeat = "no-repeat";
             document.body.style.backgroundPosition = "center";
 
-
-            alert("I love you silly rabbit. Save this link:https://shorturl.at/enAQ2  then click Ok to see how I stay feeling about you:) ❤️");
+            alert("I love you silly rabbit. Save this link: https://shorturl.at/enAQ2 then click Ok to see how I stay feeling about you ❤️");
         }
 
         function moveNoButton() {
             let button = document.getElementById("noButton");
+            let rect = button.getBoundingClientRect(); // Get current position
 
-            // Get viewport dimensions
-            let maxWidth = window.innerWidth - button.clientWidth - 20; // Ensure button doesn't go off right
-            let maxHeight = window.innerHeight - button.clientHeight - 20; // Ensure button doesn't go off bottom
+            let newX = rect.left + (Math.random() > 0.5 ? moveDistance : -moveDistance);
+            let newY = rect.top + (Math.random() > 0.5 ? moveDistance : -moveDistance);
 
-            // Generate new position within safe limits
-            let x = Math.max(10, Math.random() * maxWidth);
-            let y = Math.max(10, Math.random() * maxHeight);
+            // Ensure the button stays within the screen boundaries
+            newX = Math.max(10, Math.min(window.innerWidth - button.clientWidth - 10, newX));
+            newY = Math.max(10, Math.min(window.innerHeight - button.clientHeight - 10, newY));
 
-            button.style.left = `${x}px`;
-            button.style.top = `${y}px`;
+            button.style.left = `${newX}px`;
+            button.style.top = `${newY}px`;
+
+            // Gradually increase move distance but limit it
+            moveDistance = Math.min(moveDistance + 10, 200); // Maximum move distance: 200px
+        }
+
+        function forceYes() {
+            // Change button text to "Yes" and trigger the yesClicked function
+            let noButton = document.getElementById("noButton");
+            noButton.innerText = "Yes 💕";
+            noButton.style.backgroundColor = "#d6336c";
+            noButton.style.color = "white";
+            noButton.onclick = yesClicked; // Make it behave like the "Yes" button
+
+            // Run the Yes function immediately
+            yesClicked();
         }
     </script>
 
