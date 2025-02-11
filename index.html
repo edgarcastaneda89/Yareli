@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine? ❤️</title>
+    <style>
+        /* Prevent scrolling */
+        html,
+        body {
+            overflow: hidden;
+            /* Disables scrolling */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        body {
+            background-image: url('valentinesPic.jpg');
+            /* Initial background */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: background 1s ease-in-out;
+            /* Smooth transition */
+            position: relative;
+        }
+
+        #valentine-text {
+            position: absolute;
+            top: 11%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            font-weight: bold;
+            background: rgba(255, 182, 193, 0.8);
+            /* Soft pink background for readability */
+            padding: 10px 20px;
+            border-radius: 15px;
+            color: black;
+        }
+
+        #container {
+            position: relative;
+            margin-top: 50px;
+        }
+
+        img {
+            width: 150px;
+        }
+
+        .buttons {
+            margin-top: 100px;
+            position: relative;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 12px 24px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .yes {
+            background-color: #d6336c;
+            color: white;
+        }
+
+        .no {
+            background-color: black;
+            color: white;
+            position: absolute;
+            left: 50%;
+            top: 60px;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="valentine-text">Yareli, will you be my valentine? ❤️</div>
+
+    <div id="container">
+        <img src="https://upload.wikimedia.org/wikipedia/en/9/93/Hello_Kitty.svg" alt="">
+
+        <div class="buttons">
+            <button class="yes" onclick="yesClicked()">Yes 💕</button>
+            <button class="no" id="noButton" onmouseover="moveNoButton()">❌ Nope!</button>
+        </div>
+    </div>
+
+    <script>
+        function yesClicked() {
+            // Change the background to the animated Snoopy Love GIF
+            document.body.style.backgroundImage = "url('snoopy-love.gif')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundRepeat = "no-repeat";
+            document.body.style.backgroundPosition = "center";
+
+            /
+            alert("I love you silly rabbit. Save this link:https://shorturl.at/enAQ2  then click Ok to see how I stay feeling about you:) ❤️");
+        }
+
+        function moveNoButton() {
+            let button = document.getElementById("noButton");
+
+            // Get viewport dimensions
+            let maxWidth = window.innerWidth - button.clientWidth - 20; // Ensure button doesn't go off right
+            let maxHeight = window.innerHeight - button.clientHeight - 20; // Ensure button doesn't go off bottom
+
+            // Generate new position within safe limits
+            let x = Math.max(10, Math.random() * maxWidth);
+            let y = Math.max(10, Math.random() * maxHeight);
+
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+    </script>
+
+</body>
+
+</html>
